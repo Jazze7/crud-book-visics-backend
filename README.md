@@ -20,7 +20,7 @@ This project is a simple CRUD (Create, Read, Update, Delete) API for managing a 
 1. Clone the repository:
    ```
    https://github.com/Jazze7/crud-book-visics-backend.git
-   cd xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxcrud-book-visics-backend
+   cd crud-book-visics-backend
    ```
 
 2. Create and activate a virtual environment (optional):

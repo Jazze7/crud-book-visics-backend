@@ -15,6 +15,8 @@ class CustomPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 100
 
+
+# function to view books
 @api_view(["GET"])
 @permission_classes([AllowAny])
 def books(request):
@@ -29,6 +31,7 @@ def books(request):
         "request": request
     }
     serializer = BookSerializer(paginated_queryset, many=True, context=context)
+
     response_data = {
         "status_code": 200,
         "data": serializer.data,
@@ -49,12 +52,14 @@ def create_book(request):
         serializer = BookSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+
             response_data = {
                 "status_code": 201,
                 "message": "Successfully added product",
                 "data": serializer.data,
             }
             return Response(response_data, status=status.HTTP_201_CREATED)
+        
         else:
             response_data = {
                 "status_code": 400,
@@ -75,6 +80,7 @@ def view_book(request,pk):
         "request": request
         }
         serializer=BookSerializer(instance,context=context)
+
         response_data = {
         "status_code": 200,
         "data": serializer.data
@@ -95,6 +101,7 @@ def view_book(request,pk):
 def update_book(request,pk):
     if Book.objects.filter(pk=pk).exists():
         instance=Book.objects.get(pk=pk)
+
         context = {
         "request": request
         }
@@ -135,6 +142,7 @@ def delete_book(request, pk):
             "message": "Deleted Successfully"
         }
         return Response(response_data)
+    
     except Book.DoesNotExist:
         response_data = {
             "status_code": 404,
